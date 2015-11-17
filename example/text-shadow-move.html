@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>text-shadow-move</title>
+	<style>
+	     *{margin:0;padding:0;}
+         body{background:#111;}
+         #s1{width:360px;height:30px;text-align:center;line-height:30px;position:absolute;left:50%;top:50%;margin-left:-180px;margin-top:-15px;font-size:30px;text-shadow:0px 0px 0px red;color:#fff;}
+         #sun{width:100px;height:100px;background:#ccc;position:absolute;left:0;top:0;border-radius:50%;box-shadow:0 0 80px #fff;}
+         
+	</style>
+	<script>
+          window.onload=function(){
+          	var oS=document.getElementById('s1');
+          	var oSun=document.getElementById('sun');
+          	document.onmousemove=function(ev){
+          		var sX=oS.offsetLeft+oS.offsetWidth/2;
+          		var sY=oS.offsetTop+oS.offsetHeight/2;
+          		var mX=ev.pageX;
+          		var mY=ev.pageY;
+          		var disX=(sX-mX)/3;
+          		var disY=(sY-mY)/3;
+          		var dis=Math.sqrt(disX*disX+disY*disY)/30
+          		oS.style.textShadow=disX+'px '+disY+'px '+dis+'px red';
+          		oSun.style.left=mX-oSun.offsetWidth/2+'px';
+          		oSun.style.top=mY-oSun.offsetHeight/2+'px';
+          	};
+          };
+	</script>
+</head>
+<body>
+	<span id="s1">studentzhoujun@sina.com</span>
+	<span id="sun"></span>
+</body>
+</html>
