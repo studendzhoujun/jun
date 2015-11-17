@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<script src="jsonp.js"></script>
+	<script>
+       window.onload=function(){
+       	jsonp({
+       		url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+       		date:{wd:'jun'},
+       		success:function(json){
+       			alert(json.s)
+       		}
+       	})
+       };
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
