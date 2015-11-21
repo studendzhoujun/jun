@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>preserve-3d-try</title>
+	<style>
+       *{margin:0;padding:0;}
+       body{background:#111;}
+       .box{width:300px;height:300px;background:rgba(184,214,208,0.5);margin:150px auto;position:relative;left:0;top:0;-webkit-transform-style:preserve-3d;-webkit-transform:perspective(800px) rotateY(0deg) rotateX(0deg);}
+       .box .p1{width:50px;height:50px;background:red;position:absolute;left:0;top:-50px;}
+        .box .p2{width:50px;height:50px;background:#399;position:absolute;left:60px;top:-50px;}
+       .box div{width:100%;height:50%;position:absolute;-webkit-transform:perspective(800px) rotateX(0deg);-webkit-transform-origin:center bottom;-webkit-transition:2s all ease;opacity:1;}
+       .front{top:0;left:0;background:#f90;-webkit-transform:translateZ(1px);}
+       .back{top:150px;left:0;background:#909;-webkit-transform:translateZ(1px);}
+       
+	</style>
+	<script>
+       window.onload=function(){
+       	var oBox=document.querySelector('.box');
+       	var oBtn=oBox.children[0];
+       	var oBtn2=oBox.children[1];
+       	var oFront=document.querySelector('.front');
+       	var oBack=document.querySelector('.back');
+       	var iNow=-50;
+       	oBtn.onclick=function(){
+       		oBox.style.WebkitTransition='2s all ease';
+       		oBox.style.WebkitTransform='rotateY(-50deg) rotateX(30deg)';
+       		oFront.style.WebkitTransform='rotateX(-45deg)';
+       		oBack.style.WebkitTransform='rotateX(-45deg)';
+       		oFront.style.opacity=0.7;
+       		oBack.style.opacity=0.7;
+       		setTimeout(function(){
+                    timer=setInterval(function(){
+                             iNow+=4;
+                         oBox.style.WebkitTransform='rotateY('+iNow+'deg) rotateX(30deg)';
+                    },100)
+       		},6000)
+       	};
+       	oBtn2.onclick=function(){
+       		oBox.style.WebkitTransition='4s all ease';
+       		oBox.style.WebkitTransform='rotateY(0deg) rotateX(0deg)';
+       		oFront.style.WebkitTransform='rotateX(0deg)';
+       		oBack.style.WebkitTransform='rotateX(0deg)';
+       		oFront.style.opacity=1;
+       		oBack.style.opacity=1;
+       		clearInterval(timer);
+       		iNow=-50;
+       	};
+       };
+	</script>
+</head>
+<body>
+	<div class="box">
+	    <p class="p1">3D</p>
+	    <p class="p2">2D</p>
+		<div class="front">这是第一块内容</div>
+		<div class="back">哈哈哈，number2-content</div>
+	</div>
+</body>
+</html>

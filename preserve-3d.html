@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>preserve-3d</title>
+	<style>
+       *{margin:0;padding:0;}
+       body{background:#111;}
+       .box{width:300px;height:300px;background:#ccc;margin:150px auto;position:relative;left:0;top:0;-webkit-transform-style:preserve-3d;-webkit-transform:perspective(800px) rotateY(50deg) rotateX(30deg);}
+       .box div{width:100%;height:100%;position:absolute;top:0;left:0;}
+       .front{background:#f90;-webkit-transform:translateZ(100px);}
+       .back{background:#909;-webkit-transform:translateZ(-100px);}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="front"></div>
+		<div class="back"></div>
+	</div>
+</body>
+</html>
