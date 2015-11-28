@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>obj-offsettop</title>
+	<style>
+     *{margin:0;padding:0;}
+     .div1{width:300px;height:300px;position:absolute;left:100px;top:0;background:#090;}
+     .div2{width:200px;height:200px;position:absolute;left:100px;top:0;background:#900;}
+     .div3{width:100px;height:100px;position:absolute;left:50px;top:0;background:#009;}
+	</style>
+	<script>
+	function getPos(obj){
+		var l=0;
+		var t=0;
+        while(obj){
+	        l+=obj.offsetLeft;
+	        t+=obj.offsetTop;
+	        obj=obj.offsetParent;
+        }
+
+		return {left:l,top:t}
+	}
+      window.onload=function(){
+      	var oDiv1=document.querySelector('.div1');
+      	var oDiv2=document.querySelector('.div2');
+      	var oDiv3=document.querySelector('.div3');
+      	alert(getPos(oDiv2).left)
+      };
+	</script>
+</head>
+<body>
+	<div class="div1">
+		<div class="div2">
+			<div class="div3"></div>
+		</div>
+	</div>
+</body>
+</html>
