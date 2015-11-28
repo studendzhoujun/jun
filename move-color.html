@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>hh</title>
+	<style>
+     *{margin:0;padding:0;}
+     #div1{width:100px;height:100px;background:#090;position:absolute;left:0;top:0;}
+	</style>
+	<script>
+	function Sport(obj){
+		  if(!obj)return;
+          this.obj=obj;
+          this.type='linear';  //linear  ......
+          this.speed=4;
+          this.left=0;
+          this.top=0;
+	}
+	Sport.prototype.tanmove=function(iTarget){
+		var _this=this;
+             setInterval(function(){
+             	_this.speed+=(iTarget-_this.left)/5;
+             	_this.speed*=0.7;
+             	_this.left+=_this.speed;
+             	_this.obj.style.left=_this.left+'px';
+             },16)
+	};
+
+	function ChangeColor(){
+		Sport.apply(this,arguments);
+		
+
+	};
+	ChangeColor.prototype=new Sport();
+	ChangeColor.prototype.constructor=ChangeColor;
+	var oldmove=ChangeColor.prototype.tanmove;
+	ChangeColor.prototype.color=function(color,iTarget){
+		oldmove.call(this,iTarget)
+		this.color=color;
+		this.obj.style.background=this.color;
+	};
+   window.onload=function(){
+   	var oDiv=document.querySelector('#div1');
+   	//var om=new Sport(oDiv);
+   	var oc=new ChangeColor(oDiv);
+
+
+   	oDiv.onclick=function(){
+   		//om.tanmove(600)
+
+   		oc.color('red',400)
+   	};
+   	/*oDiv.onclick=function(){
+   		var left=0;
+   		var ispeed=5;
+   		setInterval(function(){
+   			ispeed+=(300-left)/5;
+   			ispeed*=0.7;
+   			left+=ispeed;
+   			oDiv.style.left=left+'px';
+   		},30)
+   	};*/
+   };
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+</html>
