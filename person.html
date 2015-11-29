@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>person</title>
+	<script>
+    function Person(name,age){
+    	this.name=name;
+    	this.age=age;
+    	this.job=null;
+    }
+    Person.prototype.showName=function(){
+    	alert(this.name)
+    }
+    Person.prototype.showAge=function(){
+    	alert(this.age)
+    }
+    Person.prototype.showJob=function(){
+    	alert(this.job)
+    }
+    function Myself(){
+    	Person.apply(this,arguments);
+    	this.fond='web前端';
+
+    }
+    Myself.prototype=new Person();
+    Myself.prototype.constructor=Myself;
+    var oldShow=Myself.prototype.showJob;
+    Myself.prototype.fondof=function(){
+    	alert(this.fond)
+    	
+    }
+
+    var p=new Myself('周军',25)
+    p.showName();
+    p.showAge();
+    p.showJob();
+    p.fondof();
+	</script>
+</head>
+<body>
+	<div style="background:#ccc"><img src="1.png"></div>
+</body>
+</html>
