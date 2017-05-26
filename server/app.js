@@ -2,19 +2,21 @@
  * @Author: zhouJun 
  * @Date: 2017-05-26 10:38:10 
  * @Last Modified by: zhouJun
- * @Last Modified time: 2017-05-26 10:59:35
+ * @Last Modified time: 2017-05-26 14:11:48
  */
 const express = require('express');
 const app = express();
 const path = require('path');
 const fs= require('fs')
-const morgan = require('morgan');
+const logger = require('morgan');
 const methodOverride = require('method-override');
 
 const errorHandler = require('errorhandler');
 
 const compression = require('compression');
 
+const foods=require('./foods');
+app.use('/foods',foods);
 const opts = {
     "port": 3000,
     "message":'hello everyone'
@@ -23,7 +25,7 @@ const opts = {
 //     res.send('Hello World!');
 // });
 app.use(compression());
-app.use(morgan('dev'));
+app.use(logger('dev'));
 app.use(methodOverride());
 app.use(errorHandler());
 app.set('port', process.env.PORT || opts.port);
@@ -32,6 +34,13 @@ app.use(express.static('static'));
 
 app.get('/', function (req, res) {
     res.send(opts.message);
+});
+//路由句柄
+app.get('/fg',function(req,res,next){
+    console.log('response will be sent the next function ...');
+    next();
+},function(req,res){
+   res.send('from next function')
 });
 //error handle
 app.use(function(err,req,res,next){
