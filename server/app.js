@@ -2,7 +2,7 @@
  * @Author: zhouJun 
  * @Date: 2017-05-26 10:38:10 
  * @Last Modified by: zhouJun
- * @Last Modified time: 2017-05-26 10:46:59
+ * @Last Modified time: 2017-05-26 10:59:35
  */
 const express = require('express');
 const app = express();
@@ -28,7 +28,7 @@ app.use(methodOverride());
 app.use(errorHandler());
 app.set('port', process.env.PORT || opts.port);
 app.use(express.query());
-
+app.use(express.static('static'));
 
 app.get('/', function (req, res) {
     res.send(opts.message);
