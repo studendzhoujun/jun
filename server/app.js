@@ -2,7 +2,7 @@
  * @Author: zhouJun 
  * @Date: 2017-05-26 10:38:10 
  * @Last Modified by: zhouJun
- * @Last Modified time: 2017-05-26 14:11:48
+ * @Last Modified time: 2017-05-27 16:05:15
  */
 const express = require('express');
 const app = express();
@@ -45,11 +45,13 @@ app.get('/fg',function(req,res,next){
 //error handle
 app.use(function(err,req,res,next){
     console.log(err.stack);
-    res.status(500).send('somethting broke')
+    res.status(500).send('somethting broke');
+    next();
 })
 //404
 app.use(function(req,res,next){
-    res.status(404).send('sorry can not find that')
+    res.status(404).send('sorry can not find that');
+    next();
 });
 app.listen(app.get('port'), function() {
   return console.log("try Express run at " + app.get('env') + " listening on port" + app.get('port'));
