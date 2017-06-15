@@ -2,5 +2,5 @@
 # try Express
 
 ```
-npm run server
+npm run server or node server/app.js
 ```
