@@ -10,13 +10,39 @@
        		url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
        		date:{wd:'jun'},
        		success:function(json){
-       			alert(json.s)
+       			//alert(json.s)
        		}
        	})
        };
 	</script>
 </head>
 <body>
-	
+	<input id="in">
+	<ul id="oul">
+	</ul>
 </body>
+<script>
+var oIn=document.querySelector('#in');
+var oUl=document.querySelector('#oul');
+oIn.onkeydown=function(){
+	var value=oIn.value;
+    oUl.innerHTML='';
+	console.log(value);
+	   jsonp({
+       		url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+       		date:{wd:value},
+       		success:function(json){
+                   console.log(json.s);
+				   oUl.innerHTML=addli(json.s)
+       		}
+       	})
+}
+function addli(arr){
+	var child='';
+	arr.forEach(function(item,index){
+		child+=`<li>${item}</li>`;
+	})
+	return child;
+}
+</script>
 </html>
