@@ -19,5 +19,7 @@ router.get('/',function(req,res){
 router.get('/about',function(req,res){
     res.send('about foods');
 })
-
+//router.get('/apple',function(req,res){
+//    res.send('this is a apple');
+//})
 module.exports=router;
