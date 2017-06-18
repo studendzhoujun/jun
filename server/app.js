@@ -2,7 +2,7 @@
  * @Author: zhouJun 
  * @Date: 2017-05-26 10:38:10 
  * @Last Modified by: zhouJun
- * @Last Modified time: 2017-06-15 16:16:04
+ * @Last Modified time: 2017-06-18 22:29:34
  */
 const express = require('express');
 const app = express();
@@ -15,7 +15,7 @@ const errorHandler = require('errorhandler');
 
 const compression = require('compression');
 
-const foods=require('./foods');
+const foods=require('../router/foods.js');
 app.use('/foods',foods);
 const opts = {
     "port": 3000,
