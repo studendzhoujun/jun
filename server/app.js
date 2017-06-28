@@ -2,7 +2,7 @@
  * @Author: zhouJun 
  * @Date: 2017-05-26 10:38:10 
  * @Last Modified by: zhouJun
- * @Last Modified time: 2017-06-18 22:29:34
+ * @Last Modified time: 2017-06-28 15:49:05
  */
 const express = require('express');
 const app = express();
@@ -33,10 +33,16 @@ app.use(express.query());
 
 // app.use(express.static('static'));
 app.use(express.static(path.join(__dirname,'../','static')));
-
 app.get('/', function (req, res) {
     res.send(opts.message);
 });
+//combo
+app.get('*??',function(req,res,next){
+    console.log(req.url);
+    let url=req.url.replace(/(\w+|\/)+/,'').replace(/\?\?/,'');
+    console.log(url);
+    res.send('ok');
+})
 //路由句柄
 app.get('/fg',function(req,res,next){
     console.log('response will be sent the next function ...');
