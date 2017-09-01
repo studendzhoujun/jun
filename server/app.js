@@ -2,7 +2,7 @@
  * @Author: zhouJun 
  * @Date: 2017-05-26 10:38:10 
  * @Last Modified by: zhouJun
- * @Last Modified time: 2017-06-28 15:49:05
+ * @Last Modified time: 2017-09-01 17:31:25
  */
 const express = require('express');
 const app = express();
@@ -16,6 +16,7 @@ const errorHandler = require('errorhandler');
 const compression = require('compression');
 
 const foods=require('../router/foods.js');
+const opn=require('opn');
 app.use('/foods',foods);
 const opts = {
     "port": 3000,
@@ -62,5 +63,6 @@ app.use(function(req,res,next){
     next();
 });
 app.listen(app.get('port'), function() {
+    opn('http://localhost:3000/')
   return console.log("try Express run at " + app.get('env') + " listening on port" + app.get('port'));
 });
