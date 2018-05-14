@@ -4,13 +4,26 @@
 	<meta charset="UTF-8">
 	<title>gradient</title>
 	<style>
-	     *{margin:0;padding:0;}
-
-         div{width:200px;height:200px;background:#ccc;margin:100px auto;background:-webkit-linear-gradient(left top,red,blue,green);}
-         
+	 *{margin:0;padding:0;}
+    .box{width:200px;height:200px;background:#ccc;margin:100px auto;background:-webkit-linear-gradient(left top,red,blue,green);}
 	</style>
 </head>
 <body>
-	<div></div>
+  <!-- <div class="box"></div> -->
+  <input id="search" type="text" autofoucs="autofocus"/>
+  <div class="box"></div>
 </body>
+<script>
+	function abc(){
+	    var oBox =  document.querySelector('.box')
+		var oInput = document.querySelector('#search')
+		 console.log('12121121')
+		 oInput.focus()
+
+	}
+	 setTimeout(()=>{
+		 abc()
+	 },1000)
+
+</script>
 </html>
