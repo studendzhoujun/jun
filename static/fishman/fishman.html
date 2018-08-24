@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>fishman</title>
+<style>
+body {background:black; text-align:center;}
+#c1 {background:url(img/game_bg_2_hd.jpg) no-repeat;}
+</style>
+<script src="js/comm.js"></script>
+<script src="js/sprite.js"></script>
+<script src="js/fish.js"></script>
+<script src="js/cannon.js"></script>
+<script src="js/bullet.js"></script>
+<script>
+var count=0;
+
+window.onload=function ()
+{
+	var oC=document.getElementById('c1');
+	var gd=oC.getContext('2d');
+	
+	loadImages({
+		bottom:		'img/bottom.png',
+		bullet:		'img/bullet.png',
+		fish1:		'img/fish1.png',
+		fish2:		'img/fish2.png',
+		fish3:		'img/fish3.png',
+		fish4:		'img/fish4.png',
+		fish5:		'img/fish5.png',
+		cannon1:	'img/cannon1.png',
+		cannon2:	'img/cannon2.png',
+		cannon3:	'img/cannon3.png',
+		cannon4:	'img/cannon4.png',
+		cannon5:	'img/cannon5.png',
+		cannon6:	'img/cannon6.png',
+		cannon7:	'img/cannon7.png',
+		bullet:		'img/bullet.png',
+	}, function (imgs){
+		document.onmousemove=function (ev)
+		{
+			var x=ev.pageX-oC.offsetLeft, y=ev.pageY-oC.offsetTop;
+			
+			var a=x-cannon.x;
+			var b=y-cannon.y;
+			
+			cannon.rotate=a2d(Math.atan2(b, a))+90;
+		};
+		
+		//炮弹
+		var aBullet=[];
+		
+		oC.onclick=function ()
+		{
+			var b=new Bullet(imgs.bullet, cannon.type);
+			
+			aBullet.push(b);
+			
+			b.x=cannon.x;
+			b.y=cannon.y;
+			b.rotate=cannon.rotate;
+		};
+		
+		//鱼
+		var aFish=[];
+		
+		//产生鱼
+		setInterval(function (){
+			if(Math.random()<0.02)	//10%
+			{
+				var f=new Fish(imgs, rnd(1, 6));
+				
+				f.x=-50;
+				f.y=rnd(0, oC.height);
+				
+				f.rotate=90;
+				
+				aFish.push(f);
+			}
+		}, 20);
+		
+		//炮台
+		var bottom=new Sprite(imgs.bottom);
+		
+		bottom.w=765;
+		bottom.h=71;
+		
+		bottom.x=765/2+20;
+		bottom.y=oC.height-71/2+1;
+		
+		//炮
+		var cannon=new Cannon(imgs, 1);
+		
+		cannon.x=765/2+62;
+		cannon.y=oC.height-30;
+		
+		setInterval(function (){
+			gd.clearRect(0,0,oC.width,oC.height);
+			
+			bottom.draw(gd);
+			for(var i=0;i<aBullet.length;i++)
+			{
+				aBullet[i].draw(gd);
+				aBullet[i].move();
+				
+				//碰撞检测
+				for(var j=0;j<aFish.length;j++)
+				{
+					if(aBullet[i].collTest(aFish[j]))
+					{
+						aBullet.splice(i, 1);
+						i--;
+						
+						aFish.splice(j, 1);
+						j--;
+						
+						count++;
+						
+						if(i==-1 || j==-1)
+							break;
+					}
+				}
+			}
+			cannon.draw(gd);
+			
+			for(var i=0;i<aFish.length;i++)
+			{
+				aFish[i].draw(gd);
+				aFish[i].move();
+			}
+			//f.draw(gd);
+			//f.move();
+			
+			
+		}, 30);
+	});
+};
+</script>
+</head>
+
+<body>
+<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>
+
+
+
+
+
+

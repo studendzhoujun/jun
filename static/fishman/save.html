@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>drawImage</title>
+<style>
+body {background:black; text-align:center;}
+#c1 {background:white;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oC=document.getElementById('c1');
+	var gd=oC.getContext('2d');
+	
+	var oImg=new Image();
+	
+	oImg.src='1.jpg';
+	oImg.onload=function ()
+	{
+		gd.fillStyle='#fff';
+		gd.fillRect(0,0,oC.width,oC.height);
+		
+		//跟保存本身无关
+		//gd.drawImage(img, x, y);
+		gd.drawImage(oImg, 10, 10);
+		
+		//像素操作
+		//1.获取
+		var imageData=gd.getImageData(10, 10, 293, 220);
+		var arr=imageData.data;
+		
+		//arr——4
+		//(y*w+x)*4
+		for(var x=0;x<=293;x++)
+		{
+			for(var y=0;y<=220;y++)
+			{
+				var n=(y*293+x)*4;
+				
+				arr[n]+=50;
+				arr[n+1]+=50;
+				arr[n+2]+=50;
+			}
+		}
+		
+		//2.放回去
+		gd.putImageData(imageData, 320, 10);
+		
+		//保存
+		var str=oC.toDataURL();	//只有图像
+		
+		var oImgEle=document.getElementById('img1');
+		oImgEle.src=str;
+	};
+};
+</script>
+</head>
+
+<body>
+<canvas id="c1" width="800" height="600"></canvas>
+<img src="" id="img1" />
+</body>
+</html>
+
+
+
+
+
+
