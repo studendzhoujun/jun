@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import layout from 'components/app'
+import index from 'components/index'
 
 Vue.use(Router)
 
@@ -12,6 +13,10 @@ export function createRouter () {
       {
         path: '/',
         component: layout
+      },
+      {
+        path: '/index',
+        component: index
       }
     ]
   })
