@@ -20,7 +20,7 @@ const opn=require('opn');
 app.use('/foods',foods);
 const opts = {
     "port": 3000,
-    "message":'hello everyone'
+    "message":'hello everyone !!'
 }
 // app.get('/', function (req, res) {
 //     res.send('Hello World!');
